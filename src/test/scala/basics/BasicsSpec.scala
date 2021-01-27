@@ -5,7 +5,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 import org.scalatestplus.scalacheck.ScalaCheckDrivenPropertyChecks
 
-class BasicSpec extends AnyFlatSpec with ScalaCheckDrivenPropertyChecks {
+class BasicsSpec extends AnyFlatSpec with ScalaCheckDrivenPropertyChecks {
   "gcd" should "be equals to" in {
     gcd(19, 18) shouldEqual 1
     gcd(12, 16) shouldEqual 4
