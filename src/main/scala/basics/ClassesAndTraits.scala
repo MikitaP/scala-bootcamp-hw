@@ -113,8 +113,8 @@ object ClassesAndTraits {
       extends Located3D
       with Movable3D
       with SurfaceArea
-      with Volume
       with Bounded3D
+      with Volume
 
   sealed trait Movable3D {
     def move(dx: Double, dy: Double, dz: Double): Shape3D
@@ -227,12 +227,12 @@ object ClassesAndTraits {
     override def minZ: Double = z
     override def maxZ: Double = z + length
 
-    override def move(dx: Double, dy: Double, dz: Double): Cuboid =
-      Cuboid(x + dx, y + dy, z + dz, width, height, length)
-
     override def volume: Double = length * width * height
     override def surfaceArea: Double =
       2 * (length * width + length * height + width * height)
+
+    override def move(dx: Double, dy: Double, dz: Double): Cuboid =
+      Cuboid(x + dx, y + dy, z + dz, width, height, length)
   }
 
   final case class Triangle3D(point1: Point3D,
@@ -257,6 +257,9 @@ object ClassesAndTraits {
     override def maxZ: Double =
       List(point1, point2, point3, point4).map(_.z).max
 
+    override def volume: Double = ???
+    override def surfaceArea: Double = ???
+
     override def move(dx: Double, dy: Double, dz: Double): Triangle3D =
       Triangle3D(
         Point3D(point1.x + dx, point1.y + dy, point1.z + dz),
@@ -265,7 +268,5 @@ object ClassesAndTraits {
         Point3D(point4.x + dx, point4.y + dy, point4.z + dz)
       )
 
-    override def volume: Double = ???
-    override def surfaceArea: Double = ???
   }
 }
