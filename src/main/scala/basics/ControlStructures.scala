@@ -45,6 +45,7 @@ object ControlStructures {
   val EMPTY_LIST_MESSAGE: String = "Empty list"
   val ZERO_DIVISION_MESSAGE: String = "Zero division exception"
   val WHITESPACE: String = " "
+  val ERROR_PREFIX: String = "Error: "
 
   sealed trait Result
   final case class CalcResult(value: Double, input: Command) extends Result
@@ -56,30 +57,35 @@ object ControlStructures {
       .toList match {
       case "divide" :: x =>
         Try(Divide(x.head.toDouble, x.last.toDouble)) match {
-          case Success(value)     => Right(value)
-          case Failure(exception) => Left(ErrorMessage(exception.toString))
+          case Success(value) => Right(value)
+          case Failure(exception) =>
+            Left(ErrorMessage(ERROR_PREFIX + exception.toString))
         }
       case "sum" :: x =>
         Try(Sum(x.map(x => x.toDouble))) match {
-          case Success(value)     => Right(value)
-          case Failure(exception) => Left(ErrorMessage(exception.toString))
+          case Success(value) => Right(value)
+          case Failure(exception) =>
+            Left(ErrorMessage(ERROR_PREFIX + exception.toString))
         }
       case "average" :: x =>
         Try(Average(x.map(x => x.toDouble))) match {
-          case Success(value)     => Right(value)
-          case Failure(exception) => Left(ErrorMessage(exception.toString))
+          case Success(value) => Right(value)
+          case Failure(exception) =>
+            Left(ErrorMessage(ERROR_PREFIX + exception.toString))
         }
       case "min" :: x =>
         Try(Min(x.map(x => x.toDouble))) match {
-          case Success(value)     => Right(value)
-          case Failure(exception) => Left(ErrorMessage(exception.toString))
+          case Success(value) => Right(value)
+          case Failure(exception) =>
+            Left(ErrorMessage(ERROR_PREFIX + exception.toString))
         }
       case "max" :: x =>
         Try(Max(x.map(x => x.toDouble))) match {
-          case Success(value)     => Right(value)
-          case Failure(exception) => Left(ErrorMessage(exception.toString))
+          case Success(value) => Right(value)
+          case Failure(exception) =>
+            Left(ErrorMessage(ERROR_PREFIX + exception.toString))
         }
-      case _ => Left(ErrorMessage("Unknown command"))
+      case _ => Left(ErrorMessage(ERROR_PREFIX + "Unknown command"))
     }
   }
 
@@ -88,21 +94,19 @@ object ControlStructures {
   def calculate(x: Command): Either[ErrorMessage, Result] = {
     x match {
       case Divide(x, y) =>
-        if (y == 0) Left(ErrorMessage(ZERO_DIVISION_MESSAGE))
-        else if (y.isNaN)
-          Left(ErrorMessage(ZERO_DIVISION_MESSAGE + " hello nah"))
+        if (y == 0) Left(ErrorMessage(ERROR_PREFIX + ZERO_DIVISION_MESSAGE))
         else Right(CalcResult(x / y, Divide(x, y)))
       case Sum(list) =>
-        if (list.isEmpty) Left(ErrorMessage(EMPTY_LIST_MESSAGE))
+        if (list.isEmpty) Left(ErrorMessage(ERROR_PREFIX + EMPTY_LIST_MESSAGE))
         else Right(CalcResult(list.sum, Sum(list)))
       case Average(list) =>
-        if (list.isEmpty) Left(ErrorMessage(EMPTY_LIST_MESSAGE))
+        if (list.isEmpty) Left(ErrorMessage(ERROR_PREFIX + EMPTY_LIST_MESSAGE))
         else Right(CalcResult(list.sum / list.size, Average(list)))
       case Min(list) =>
-        if (list.isEmpty) Left(ErrorMessage(EMPTY_LIST_MESSAGE))
+        if (list.isEmpty) Left(ErrorMessage(ERROR_PREFIX + EMPTY_LIST_MESSAGE))
         else Right(CalcResult(list.min, Min(list)))
       case Max(list) =>
-        if (list.isEmpty) Left(ErrorMessage(EMPTY_LIST_MESSAGE))
+        if (list.isEmpty) Left(ErrorMessage(ERROR_PREFIX + EMPTY_LIST_MESSAGE))
         else Right(CalcResult(list.max, Max(list)))
     }
   }
