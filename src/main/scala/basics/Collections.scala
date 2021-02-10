@@ -1,6 +1,6 @@
 package basics
 
-object Collections extends {
+object Collections extends App {
 
   // https://leetcode.com/problems/running-sum-of-1d-array/
 //  val list = List(1, 2, 3, 5)
@@ -63,4 +63,31 @@ object Collections extends {
       .map(x => x._2 - x._1)
       .max
   }
+
+  // https://twitter.com/allenholub/status/1357115515672555520/photo/1
+  // pass the interview
+  def count(s: String): List[(Char, Int)] = {
+    s.foldLeft(List.empty[(Char, Int)]) {
+        case ((last, count) :: tail, c) if c == last =>
+          (last, count + 1) :: tail
+        case (acc, c) =>
+          (c, 1) :: acc
+      }
+      .reverse
+  }
+
+  def findGap(l: List[Int]): Option[(Int, Int)] = l match {
+    case Nil     => None
+    case _ :: xs => (l zip xs).find { case (x, y) => y - x != 1 }
+  }
+
+  def min(list: List[Int]): Option[Int] = list match {
+    case Nil => None
+    case _   => list.minOption
+  }
+
+  def scanLeft[T](zero: T)(list: List[T])(f: (T, T) => T): List[T] =
+    list
+      .foldLeft(List(zero))((acc, elem) => f(acc.head, elem) :: acc)
+      .reverse
 }
