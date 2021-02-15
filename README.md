@@ -8,3 +8,4 @@
 | ClassesAndTraits | [Scala](src/main/scala/basics/ClassesAndTraits.scala) | |
 | ControlStructures | [Scala](src/main/scala/basics/ControlStructures.scala) | |
 | Collections | [Scala](src/main/scala/basics/Collections.scala) | |
+| ADT | [Scala](src/main/scala/adt/) | |
