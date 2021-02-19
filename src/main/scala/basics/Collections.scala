@@ -81,10 +81,10 @@ object Collections extends App {
     case _ :: xs => (l zip xs).find { case (x, y) => y - x != 1 }
   }
 
-  def min(list: List[Int]): Option[Int] = list match {
-    case Nil => None
-    case _   => list.minOption
-  }
+//  def min(list: List[Int]): Option[Int] = list match {
+//    case Nil => None
+//    case _   => list
+//  }
 
   def scanLeft[T](zero: T)(list: List[T])(f: (T, T) => T): List[T] =
     list
