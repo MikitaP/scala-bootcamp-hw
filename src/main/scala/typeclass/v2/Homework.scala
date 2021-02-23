@@ -55,9 +55,20 @@ object Task3 {
 }
 
 object Task4 {
-  // TODO: design a typesafe equals so i can do a === b, but it won't compile if a and b are of different types
-  // define the typeclass (think of a method signature)
-  // remember `a method b` is `a.method(b)`
+  trait Equal[T] {
+    def apply(a: T, b: T): Boolean
+  }
+
+  implicit object StringEquality extends Equal[String] {
+    override def apply(a: String, b: String): Boolean = a == b
+  }
+
+  implicit class TypeSafeEqual[T](value: T) {
+    def ===(other: T)(implicit equalizer: Equal[T]): Boolean =
+      equalizer.apply(value, other)
+  }
+
+//  "str" === 45
 }
 
 //object AdvancedHomework {
