@@ -9,3 +9,5 @@
 | ControlStructures | [Scala](src/main/scala/basics/ControlStructures.scala) | |
 | Collections | [Scala](src/main/scala/basics/Collections.scala) | |
 | ADT | [Scala](src/main/scala/adt/) | |
+| HKT |  | |
+| Error handling | [Scala](src/main/scala/error_handling/ErrorHandling.scala) | |
