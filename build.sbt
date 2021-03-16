@@ -2,7 +2,14 @@ name := "scala-bootcamp-hw"
 
 version := "0.1"
 
-scalaVersion := "2.12.12"
+scalaVersion := "2.13.4"
+
+// From https://tpolecat.github.io/2017/04/25/scalac-flags.html
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-feature",
+  "-Ymacro-annotations",
+)
 
 val http4sVersion = "0.21.7"
 val circeVersion = "0.13.0"
@@ -68,4 +75,6 @@ libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick-hikaricp" % slickVersion,
 )
 
-sbtPlugin := true
+addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.1" cross CrossVersion.full)
+
+//sbtPlugin := true

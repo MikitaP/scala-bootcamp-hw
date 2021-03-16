@@ -11,3 +11,4 @@
 | ADT | [Scala](src/main/scala/adt/) | |
 | HKT |  | |
 | Error handling | [Scala](src/main/scala/error_handling/ErrorHandling.scala) | |
+| JSON | [Scala](src/test/scala/json/HomeworkSpec.scala) | |
